@@ -1,123 +1,14 @@
-// @name BOOTSTRAP VARIABLES
-// @description See bootstrap/_variables.scss for a list of variables you can override
-
-//== Bootstrap Colors
-// Uncomment these to override bootstrap defaults. 
-
-// $gray-darker:            lighten(#000, 13.5%);
-// $gray-dark:              lighten(#000, 20%);
-// $gray:                   lighten(#000, 33.5%);
-// $gray-light:             lighten(#000, 46.7%);
-// $gray-lighter:           lighten(#000, 93.5%);
-
-// $brand-primary:         #428bca;
-// $brand-success:         #5cb85c;
-// $brand-info:            #5bc0de;
-// $brand-warning:         #f0ad4e;
-// $brand-danger:          #d9534f;
-
-//== Bootstrap breakpoints
-// $screen-xs:                  480px;
-// $screen-sm:                  768px;
-// $screen-md:                  992px;
-// $screen-lg:                  1200px;
-
+/*
+  Theme Name: NE Pride
+  Theme URI: http://nepridebaseball.com
+  Description: NE Pride Theme
+  Author: Cahill's Creative
+  Author URI: http://www.cahillscreative.com
+  Template: realsoccer
+*/
 
 @import 'bootstrap';
-// import 'bourbon/bourbon' if you want bourbon mixins.
 
-// Note: nothing else in this file is necessary.. you can strip it all out.
-
-
-/* This is an example comment for the Styleguide generator: */
-
-// @name Button
-// @description Your standard form button.
-// 
-// @state :hover - Highlights when hovering. Note: For :hover and :disabled to work, you must add .pseudo-class-hover to your styles
-// @state .primary - Indicates button is the primary action.
-// 
-// @markup
-//	<button class="myButton">This is a button</button>
-
-button.myButton {
-    display: inline-block;
-    text-decoration: none;
-    padding: 8px 11px;
-    color: #555;
-    border: 1px solid #dedede;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background-color: #ff0000;
-    &:hover, &.pseudo-class-hover {
-    	background-color: #00ff00;
-    }
-
-    &.primary {
-    	background-color: #ffff00;
-    }
-}
-
-// @name Example of headers
-// @description These are the header styles.
-// 
-// @markup
-// <h1>h1. Bootstrap 3</h1>
-// <h2>h2. Heading 2</h2>
-// <h3>h3. Heading 3</h3>
-// <h4>h4. Heading 4</h4>
-// <h5>h5. Heading 5</h5>
-// <h6>h6. Heading 6</h6>
-
-
-@media screen and (min-width: 992px) {
-  .the-icons li {
-    width: 12.5%;
-  }
-}
-  
-.the-buttons > li {
-  float: left;
-  height: 80px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  line-height: 1.25;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0 -1px -1px 0;
-}
-  
-.the-icons .glyphicon {
-  display: block;
-  margin: 5px auto;
-  vertical-align: middle;
-  margin-right: 3px;
-  font-size: 24px;
-}
-
-.the-icons li {
-  float: left;
-  width: 100px;
-  height: 110px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  line-height: 1.25;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0 auto;
-}
-
-.the-icons, .the-buttons {
-	list-style:none;
-}
-
-.the-icons .glyphicon {
-	display:inline;
+body {
+	background-color: blue;
 }

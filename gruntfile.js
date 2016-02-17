@@ -2,9 +2,9 @@ module.exports = function(grunt) {
 
     // Paths you can change:
     var siteConfig = {
-        outputFolder: 'httpdocs/wp-content/themes/default/',            // output from build processes
+        outputFolder: 'httpdocs/wp-content/themes/nepride/',            // output from build processes
         buildFolder: 'build/',
-        siteURL: "http://localhost:9000/"       // used for YSlow, validation, uncss
+        siteURL: "http://localhost:8888/"       // used for YSlow, validation, uncss
     };
 
     var allTemplates = ["<%= config.outputFolder %>**/*.html", "<%= config.outputFolder %>**/*.php", "<%= config.outputFolder %>**/*.ejs"];
@@ -92,14 +92,14 @@ module.exports = function(grunt) {
             },
             css: {
                 files: [ '<%= config.buildFolder %>css/*'],     
-                tasks: [ 'concat:css', 'cssmin', 'sftp:pushcss' ],
+                tasks: [ 'concat:css', 'cssmin' ],
                 options: {
                     livereload: true,
                 },
             },
             js: {
                 files: [ '<%= config.buildFolder %>js/*.js'],
-                tasks: ['concat:js', 'uglify', 'sftp:pushjs' ],
+                tasks: ['concat:js', 'uglify' ],
                 options: {
                     livereload: true,
                 },
@@ -109,50 +109,7 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true,
                 }
-            },
-        },
-        sftpCredentials: grunt.file.readJSON('sftp-config.json'),
-        sftp: {
-            options: {
-                path: "<%= sftpCredentials.remote_path %>",
-                host: "<%= sftpCredentials.host %>",
-                username: "<%= sftpCredentials.user %>",
-                privateKey: grunt.file.read(process.env.HOME+'/.ssh/id_rsa'),   // default key..
-                //passphrase: 'secret phrase for your key',
-                showProgress: true,
-                createDirectories: true
-            },
-            pushcss: {
-                files: [{
-                    expand: true,
-                    src: ['<%= config.outputFolder %>css/*.css'],
-                    dest: '<%= config.outputFolder %>css/'
-                }]
-            },
-            pushjs: {
-
-                files: [{
-                    expand: true,
-                    src: ['<%= config.outputFolder %>js/*.js', '<%= config.outputFolder %>js/*.map', '<%= config.outputFolder %>js/*.min.js'],
-                    dest: '<%= config.outputFolder %>js/'
-                }]
-            },
-            pushimages: {
-
-                files: [{
-                    expand: true,
-                    src: ['<%= config.outputFolder %>images/**/*.*'],
-                    dest: '<%= config.outputFolder %>images/'
-                }]
-            },
-            pushstyleguide: {
-
-                files: [{
-                    expand: true,
-                    src: ['<%= config.outputFolder %>styleguide/**/*.*'],
-                    dest: '<%= config.outputFolder %>styleguide/'
-                }]
-            },
+            }
         }
     });
 
@@ -162,11 +119,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-pngmin');
+    grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-git');
     grunt.loadNpmTasks('grunt-dss');
-    grunt.loadNpmTasks('grunt-ssh');
+    grunt.loadNpmTasks('grunt-spritesmith');
+    grunt.loadNpmTasks('grunt-html-validation');
+    grunt.loadNpmTasks('grunt-uncss');
+    grunt.loadNpmTasks('grunt-yslow');
+    grunt.loadNpmTasks('grunt-aws-s3');
+    grunt.loadNpmTasks('grunt-open');
 
-    //grunt.file.setBase('/')
-
-    grunt.registerTask('styleguide', ['kss'] );
+    grunt.registerTask('test-performance', [ 'yslow' ]);
+    grunt.registerTask('styleguide', ['dss'] );
     grunt.registerTask('default', ['sass', 'pngmin', 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js', 'dss' ]);
+    grunt.registerTask('start', [ 'watch', 'open:dev' ]);
+    grunt.registerTask('compile', [ 'default' ]);
 };
