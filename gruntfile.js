@@ -15,9 +15,9 @@ module.exports = function(grunt) {
         concat: {
             css: {
                 src: [
-                    '<%= config.buildFolder %>css/*'
+                    '<%= config.buildFolder %>*'
                 ],
-                dest: '<%= config.outputFolder %>css/styles.css'
+                dest: '<%= config.outputFolder %>style.css'
             },
             js: {
                 separator: ";",
@@ -29,8 +29,8 @@ module.exports = function(grunt) {
         },
         cssmin: {
             css: {
-                src: '<%= config.outputFolder %>css/styles.css',
-                dest: '<%= config.outputFolder %>css/styles.min.css'
+                src: '<%= config.outputFolder %>style.css',
+                dest: '<%= config.outputFolder %>style.min.css'
             }
         },
         uglify: {
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
                     includePaths: [ '<%= config.buildFolder %>sass' ]
                 },
                 files: {
-                    '<%= config.buildFolder %>css/screen.css': '<%= config.buildFolder %>sass/screen.scss'
+                    '<%= config.buildFolder %>screen.css': '<%= config.buildFolder %>sass/screen.scss'
                 }
             }
         },
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
                 },
             },
             css: {
-                files: [ '<%= config.buildFolder %>css/*'],     
+                files: [ '<%= config.buildFolder %>*'],     
                 tasks: [ 'concat:css', 'cssmin' ],
                 options: {
                     livereload: true,

@@ -15,6 +15,7 @@
 		'flickr'		=> __('Flickr','gdlr_translate'),
 		'google-plus' 	=> __('Google Plus','gdlr_translate'),				
 		'lastfm'       	=> __('Lastfm','gdlr_translate'),
+		'instagram'     => __('Instagram','gdlr_translate'),
 		'linkedin' 		=> __('Linkedin','gdlr_translate'),
 		'picasa' 		=> __('Picasa','gdlr_translate'),
 		'pinterest' 	=> __('Pinterest','gdlr_translate'),

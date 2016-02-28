@@ -103,6 +103,7 @@
 	include_once( 'include/widget/featured-player-widget.php');
 	include_once( 'include/widget/fixture-result-widget.php');
 	include_once( 'include/widget/league-table-widget.php');
+	include_once( 'include/widget/tornaments-widget.php');
 	
 	// plugin support
 	include_once( 'plugins/wpml.php');
