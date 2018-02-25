@@ -101,7 +101,7 @@
                             <table cellspacing="0" class="wp-list-taxonomy">
                                 <thead>
                                 <tr>
-                                    <th style="" class="column-cb check-column" id="cb" scope="col">&nbsp;</th><th style="" class="" id="author" scope="col"><?php _e( "Taxonomy Title", 'taxonomy-terms-order' ) ?></th><th style="" class="manage-column" id="categories" scope="col"><?php _e( "Total  Posts", 'taxonomy-terms-order' ) ?></th>    </tr>
+                                    <th style="" class="column-cb check-column" id="cb" scope="col">&nbsp;</th><th style="" class="" id="author" scope="col"><?php _e( "Taxonomy Title", 'taxonomy-terms-order' ) ?></th><th style="" class="manage-column" id="categories" scope="col"><?php _e( "Total Posts", 'taxonomy-terms-order' ) ?></th>    </tr>
                                 </thead>
 
    
@@ -115,7 +115,11 @@
 
                                             $alternate = $alternate === TRUE ? FALSE :TRUE;
                                             
-                                            $taxonomy_terms = get_terms($key);
+                                            $args = array(
+                                                        'hide_empty'    =>  0,
+                                                        'taxonomy'      =>  $post_type_taxonomy
+                                                        );
+                                            $taxonomy_terms = get_terms( $args );
                                                              
                                             ?>
                                                 <tr valign="top" class="<?php if ($alternate === TRUE) {echo 'alternate ';} ?>" id="taxonomy-<?php echo esc_attr($taxonomy)  ?>">
@@ -162,7 +166,6 @@
                 <script type="text/javascript">
                     jQuery(document).ready(function() {
                         
-                        var NestedSortableSerializedData;
                         jQuery("ul.sortable").sortable({
                                 'tolerance':'intersect',
                                 'cursor':'pointer',
@@ -171,11 +174,8 @@
                                 'placeholder':'placeholder',
                                 'nested': 'ul'
                             });
-                    });
-                    
-                    
-                    jQuery(".save-order").bind( "click", function() {
-                                
+                          
+                        jQuery(".save-order").bind( "click", function() {
                                 var mySortable = new Array();
                                 jQuery(".sortable").each(  function(){
                                     
@@ -197,13 +197,17 @@
                                 });
                                 
                                 //serialize the array
-                                var serialize_data = serialize(mySortable);
+                                var serialize_data = JSON.stringify( convArrToObj(mySortable));
                                                                                             
-                                jQuery.post( ajaxurl, { action:'update-taxonomy-order', order: serialize_data, taxonomy : '<?php echo  $taxonomy ?>' }, function() {
+                                jQuery.post( ajaxurl, { action:'update-taxonomy-order', order: serialize_data }, function() {
                                     jQuery("#ajax-response").html('<div class="message updated fade"><p><?php _e( "Items Order Updated", 'taxonomy-terms-order' ) ?></p></div>');
                                     jQuery("#ajax-response div").delay(3000).hide("slow");
                                 });
                             });
+                        
+      
+                    });
+                    
                 </script>
                 
             </div>
